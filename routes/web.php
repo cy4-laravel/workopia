@@ -13,7 +13,15 @@ Route::get('/', function () {
 
 
 Route::get('/jobs', function() {
-    return vieW('jobs.index');
+    $title = 'Available Jobs';
+    $jobs = [
+        'Web Developer',
+        'Database Admin',
+        'Software Engineer',
+        'System Analyst',
+        'AI Engineer'
+    ];
+    return vieW('jobs.index', compact('title', 'jobs'));
 })->name('jobs.index'); // example of route naming
 
 
