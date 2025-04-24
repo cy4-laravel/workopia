@@ -6,7 +6,7 @@
     <title>Jobs Listings</title>
 </head>
     <body>
-        <h1>{{$title}}</h1>
+        <h1>Avaiable jobs</h1>
         <ul>
             @forelse($jobs as $job)
                 
