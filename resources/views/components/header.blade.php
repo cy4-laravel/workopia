@@ -25,8 +25,8 @@
                     <x-nav-link url="/dashboard" :active="request()->is('dashboard')" icon="gauge">
                         Dashboard
                     </x-nav-link>
-                    <x-button-link url="/jobs/create" icon="edit" textClass="text-black" hoverClass="hover:bg-yellow-600 hover:shadow-md" bgClass="bg-yellow-500 px-4 py-2 rounded transition duration-300">
-                        Create Jobs
+                    <x-button-link url="/jobs/create" icon="edit">
+                        Create Job
                     </x-button-link>
                 </nav>
                 <button
