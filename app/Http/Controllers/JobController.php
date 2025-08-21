@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Job;
 
 class JobController extends Controller
 {
@@ -13,14 +14,9 @@ class JobController extends Controller
     public function index(): View
     {
         //
-        $jobs = [
-            'Web developer',
-            'Database Admin',
-            'Software Engineer',
-            'System Analyst'
-        ];
-
-        return view('jobs.index', compact('jobs'));
+        $jobs = Job::all();
+        // since jobs is the only thing we are gonna pass, so we can use with() syntax
+        return view('jobs.index')->with('jobs', $jobs);
     }
 
     /**
@@ -37,17 +33,34 @@ class JobController extends Controller
      */
     public function store(Request $request): string
     {
-        //
-        return "Store";
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string'
+        ]);
+
+        // next we will call the create method
+        /**
+         * just like we did in the tinker and we are bringing in 
+         * app/models/job so we can use Job and use create method.
+         * as shown below
+         */
+        Job::create([
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description']
+        ]); 
+
+        // then we will use redirect
+
+        return redirect()->route('jobs.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id): string
+    public function show(Job $job): View
     {
         //
-        return "Show";
+        return view('jobs.show')->with('job', $job);
     }
 
     /**
